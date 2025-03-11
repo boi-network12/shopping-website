@@ -1,0 +1,108 @@
+.help-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+
+h2, h3 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* FAQ Section */
+.faq-section {
+    margin-bottom: 20px;
+}
+
+.faq-item {
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.faq-item:hover {
+    background: #f1f1f1;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.faq-icon {
+    transition: transform 0.3s;
+}
+
+.faq-icon.open {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    margin-top: 8px;
+    color: #555;
+}
+
+/* Contact Section */
+.contact-section {
+    margin-bottom: 20px;
+}
+
+.icon {
+    margin-right: 8px;
+    color: #007bff;
+}
+
+.live-chat-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.live-chat-btn:hover {
+    background: #0056b3;
+}
+
+/* Ticket Form */
+.ticket-section {
+    margin-top: 20px;
+}
+
+.ticket-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-section input, .ticket-section textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.ticket-section button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ticket-section button:hover {
+    background: #218838;
+}

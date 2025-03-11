@@ -1,0 +1,83 @@
+.settings-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+    transition: background 0.3s ease;
+}
+
+.dark-mode {
+    background: #222;
+    color: #fff;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.edit-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+}
+
+.edit-btn:hover {
+    background: #0056b3;
+}
+
+.settings-section {
+    margin-top: 20px;
+}
+
+.settings-section h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.setting-item:hover {
+    background: #f1f1f1;
+}
+
+.setting-item .icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    color: #555;
+}
+
+.delete {
+    color: red;
+}
+
+.dark-mode .setting-item:hover {
+    background: #333;
+}

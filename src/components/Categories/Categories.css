@@ -1,0 +1,113 @@
+
+.CategoriesWrapper{
+    margin-top: 20px;
+    width: 100%;
+    max-width: 900px;
+    overflow-x: auto;
+    background: #f0f0f0;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.CategoriesWrapper .BiggerSizeCat{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    min-width: max-content;
+    gap: 20px;
+    font-weight: 300;
+    color: #333;
+    padding: 10px;
+}
+
+/* Optional: Style the scrollbar for a better look */
+*::-webkit-scrollbar {
+    display: none;
+}
+
+.CategoriesWrapper .BiggerSizeCat{
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For IE and Edge */
+}
+
+
+.CategoriesWrapper .BiggerSizeCat p{
+    position: relative;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.CategoriesWrapper .BiggerSizeCat p.active::after{
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #333;
+}
+
+/* Ensure "All" stays in view */
+.CategoriesWrapper .BiggerSizeCat p:first-child {
+    margin-left: 10px;
+}
+
+/* Mobile Dropdown Styles */
+.MobileDropdown {
+    width: 500px;
+    max-width: 250px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    z-index: 999;
+}
+
+.MobileDropdown .DropdownHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.MobileDropdown .DropdownHeader .arrow {
+    transition: transform 0.3s ease;
+}
+
+.DropdownHeader .arrow.open {
+    transform: rotate(180deg);
+}
+
+.MobileDropdown .DropdownMenu {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    overflow: hidden;
+    max-height: 200px;
+    overflow-y: scroll;
+    font-weight: 300;
+}
+
+.MobileDropdown .DropdownMenu p {
+    padding: 10px;
+    margin: 0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.DropdownMenu p:hover {
+    background: #e0e0e0;
+}

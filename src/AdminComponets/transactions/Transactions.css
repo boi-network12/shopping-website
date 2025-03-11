@@ -1,0 +1,91 @@
+.transactions-container {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.transactions-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background: #f9f9f9;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 1rem;
+    background: transparent;
+}
+
+.search-icon {
+    margin-right: 5px;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.transactions-table th, .transactions-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.transactions-table th {
+    background: #f9f9f9;
+}
+
+.transactions-table tr:hover {
+    background: #f1f1f1;
+}
+
+.status-cell {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-icon {
+    font-size: 1.2rem;
+}
+
+.completed {
+    color: green;
+}
+
+.pending {
+    color: orange;
+}
+
+.failed {
+    color: red;
+}
+
+.no-results {
+    text-align: center;
+    color: #888;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 15px;
+}

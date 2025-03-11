@@ -1,0 +1,41 @@
+.customer-container {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.customer-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.customer-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.customer-table th, .customer-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.customer-table th {
+    background: #f9f9f9;
+}
+
+.customer-table tr:hover {
+    background: #f1f1f1;
+}
+
+.delete-icon {
+    color: red;
+    cursor: pointer;
+}
+
+.delete-icon:hover {
+    color: darkred;
+}

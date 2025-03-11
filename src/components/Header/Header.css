@@ -1,0 +1,149 @@
+.HeaderWrapper{
+    width: 100%;
+    padding: 10px 3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #fff;
+    transition: all 0.2s ease-in-out;
+    z-index: 1000;
+}
+
+.HeaderWrapper.hideElements img,
+.HeaderWrapper.hideElements .SearchAuthContainer > .a,
+.HeaderWrapper.hideElements .SearchAuthContainer > .CartContainer {
+    display: none;
+}
+
+.HeaderWrapper > img{
+    width: 25%;
+    height: 90px;
+    object-fit: contain;
+}
+
+.HeaderWrapper .SearchAuthContainer{
+    display: flex;
+    width: 70%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5%;
+}
+
+.HeaderWrapper .SearchAuthContainer.active {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.HeaderWrapper .SearchAuthContainer.active .inputContainer{
+    width: 100%;
+    max-width: 100%;
+
+    input{
+        width: 90%;
+    }
+}
+
+.HeaderWrapper .SearchAuthContainer .inputContainer{
+    max-width: 400px;
+    display: flex;align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 20px;
+    background: #f0f0f0;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 20px;
+
+    input{
+        all: unset;
+        width: 85%;
+        font-weight: 300;
+        font-size: 1rem;
+        height: 100%;
+    }
+
+    &.active{
+        background: #c8f7c5;
+        width: 100%;
+    }
+}
+
+.HeaderWrapper .SearchAuthContainer  > .a{
+    color: #333;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 1rem;
+
+    &:hover{
+        color: green;
+    }
+}
+
+.HeaderWrapper .SearchAuthContainer > .CartContainer{
+    position: relative;
+    height: 40px;
+    display: flex;align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 40px;
+
+    &:hover{
+        background: #defade;
+    }
+
+    span{
+        position: absolute;
+        top: 80px;
+        background: #fff;
+        padding: 2px 10px;
+        border-radius: 3px;
+        letter-spacing: 0.1rem;
+        font-weight: 300;
+        display: none;
+        transition: display .3s ease;
+    }
+
+    &:hover span{
+        display: block;
+    }
+}
+
+
+/* Tablets (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    
+}
+
+
+
+/* Mobile devices */
+@media (max-width: 767px) {
+    .HeaderWrapper{
+        padding: 0 2%;
+    }
+
+    .HeaderWrapper .SearchAuthContainer .inputContainer{
+        width: 50px;
+        background-color: transparent;
+
+        input{
+            display: none;
+        }
+    }
+
+    .HeaderWrapper .SearchAuthContainer .inputContainer.active {
+        width: 100%;
+    }
+
+    .HeaderWrapper .SearchAuthContainer .inputContainer.active input {
+        display: block;
+        width: 100%;
+    }
+}

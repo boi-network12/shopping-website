@@ -1,0 +1,47 @@
+.HeroBgWrapper{
+    width: 100%;
+    background: #148114;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 18rem;
+    justify-content: center;
+
+    h1{
+        color: #fff;
+        font-size: 3rem;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+
+    p{
+        font-size: 1.5rem;
+        color: #fff;
+        text-transform: capitalize;
+    }
+}
+
+
+/* Tablets (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .HeroBgWrapper{
+        height: 12rem;
+    }
+}
+
+
+
+/* Mobile devices */
+@media (max-width: 767px) {
+    .HeroBgWrapper{
+        height: 10rem;
+
+        h1{
+            font-size: 1.8rem;
+        }
+
+        p{
+            font-size: 0.9rem;
+        }
+    }
+}

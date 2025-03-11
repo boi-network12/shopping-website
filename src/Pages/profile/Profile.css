@@ -1,0 +1,101 @@
+.profile-container {
+    width: 100%;
+    height: 100lvh;
+}
+
+.profile-content {
+    margin-top: 140px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 20px;
+    height: 100lvh;
+    background: #fff;
+    gap: 10px;
+}
+
+.profile-content aside {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.profile-content aside ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    width: 100%;
+}
+
+.profile-content aside ul li {
+    width: 100%;
+    padding: 20px 10px;
+    font-weight: 300;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border-left: 4px solid transparent; /* Default no border */
+}
+
+.profile-content aside ul li:hover {
+    background-color: #f0f0f0;
+}
+
+/* Add active indicator */
+.profile-content aside ul li.active {
+    border-left: 4px solid #148114; /* Green left border when active */
+    font-weight: 500;
+    background-color: #f0f8f0; /* Light green background for better visibility */
+}
+
+/* Border for list items */
+.profile-content aside ul li:nth-child(1),
+.profile-content aside ul li:nth-child(2),
+.profile-content aside ul li:nth-child(3) {
+    border-bottom: 1px solid #eee;
+}
+
+
+.profile-container .account-details{
+    margin-left: 10px;
+    max-width: 580px;
+    width: 100%;
+    overflow: scroll;
+}
+
+
+/* Tablets (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    
+}
+
+
+
+/* Mobile devices */
+@media (max-width: 767px) {
+    .profile-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-top: 90px;
+        padding: 0 5px;
+    }
+
+
+    .profile-content aside {
+        width: 100%;
+    }
+
+    .profile-container .account-details{
+        width: 100%;
+        max-width: 380px;
+        margin-left: 0;
+    }
+}

@@ -1,0 +1,21 @@
+.AdminDisplayContainer{
+    width: 100%;
+    height: 100lvh;
+    background: linear-gradient(to bottom, rgb(170, 203, 214), #739cb8);
+}
+
+.AdminDisplayContainer .BgDisplay{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    main{
+        margin-top: 100px;
+        width: 85%;
+        overflow-y: scroll;
+        overflow: hidden;
+        height: 800px;
+        padding: 10px;
+    }
+}

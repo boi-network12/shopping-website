@@ -1,0 +1,17 @@
+.HomeWrapper{
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-top: 105px;
+    position: relative;
+}
+
+
+/* Mobile devices */
+@media (max-width: 767px) {
+    .HomeWrapper{
+        margin-top: 90px;
+    }
+}
