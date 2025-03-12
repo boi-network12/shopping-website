@@ -4,7 +4,7 @@ import "./Customer.css";
 import { AuthContext } from '../../context/AuthContext';
 
 const Customer = () => {
-    const { user, getAllUsers } = useContext(AuthContext);
+    const { user, getAllUsers, deleteUserByAdmin  } = useContext(AuthContext);
     const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
@@ -19,6 +19,15 @@ const Customer = () => {
 
         fetchCustomers();
     }, [user, getAllUsers]);
+
+    const handleDelete = async (userId) => {
+        if (window.confirm("Are you sure you want to delete this user?")) {
+            const response = await deleteUserByAdmin(userId);
+            if (response.success) {
+                setCustomers(customers.filter(customer => customer._id !== userId))
+            }
+        }
+    }
 
     if (!user || user.role !== "admin") {
         return <p className="error-message">Access Denied: Admins only.</p>;
@@ -58,7 +67,7 @@ const Customer = () => {
                                 <td>{customer.city || "N/A"}</td>
                                 <td>{customer.address || "N/A"}</td>
                                 <td>{new Date(customer.createdAt).toLocaleDateString()}</td>
-                                <td className="delete-icon"><BiTrash /></td>
+                                <td className="delete-icon"><BiTrash onClick={() => handleDelete(customer._id)} /></td>
                             </tr>
                         ))
                     ) : (

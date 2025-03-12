@@ -163,6 +163,30 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const deleteUserByAdmin = async (userId) => {
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) throw new Error("Unauthorized");
+
+            const response = await fetch(`${API_URL}/auth/users/${userId}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || "Failed to delete user");
+
+            toast.success("User deleted successfully");
+            return { success: true };
+        } catch (error) {
+            toast.error(error.message);
+            return { success: false, message: error.message };
+        }
+    }
+
 
     return (
         <AuthContext.Provider
@@ -176,6 +200,7 @@ export const AuthProvider = ({ children }) => {
                 updateUserInfo,
                 deleteAccount,
                 getAllUsers,
+                deleteUserByAdmin
             }}
         >
             {children}

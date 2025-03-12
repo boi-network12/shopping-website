@@ -33,7 +33,7 @@ const AccountDetails = () => {
                 name: user.name || "",
                 email: user.email || "",
                 country: user.country || "Nigeria",
-                state: user.state || "",
+                state: user.state ? user.state.replace(" State", "") : "",
                 city: user.city || "",
                 address: user.address || "",
                 phone: user.phone || "",
@@ -102,9 +102,12 @@ const AccountDetails = () => {
     };
 
     const handleDelete = async () => {
+        const confirmDelete = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
+        if (!confirmDelete) return;
+
         setDeleting(true);
         await deleteAccount();
-        navigate("/")
+        navigate("/");
         setDeleting(false);
     };
 
@@ -127,7 +130,7 @@ const AccountDetails = () => {
                 />
                 <input
                     type="email"
-                    name="name"
+                    name="email"
                     value={userData.email}
                     onChange={handleChange}
                     placeholder="Email"

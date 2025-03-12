@@ -10,6 +10,7 @@ import Brands from '../../AdminComponets/Brands/Brands'
 import Transactions from '../../AdminComponets/transactions/Transactions'
 import Settings from '../../AdminComponets/Settings/Settings'
 import Help from '../../AdminComponets/Help/Help'
+import Notification from '../../AdminComponets/Notification/Notification'
 
 const componentMap = {
     "Dashboard": <Dashboard />,
@@ -24,11 +25,16 @@ const componentMap = {
 
 const AdminDisplay = () => {
     const [activeComponent, setActiveComponent] = useState("Dashboard");
+    const [notificationActive, setNotificationActive] = useState(false)
+
+    const handleNotificationClose = () => {
+      setNotificationActive(false)
+    }
 
 
   return (
     <div className='AdminDisplayContainer'>
-        <AdminHeader/>
+        <AdminHeader setNotificationActive={setNotificationActive} />
         <div className='BgDisplay'>
             <aside>
                 <AdminSideNavigation 
@@ -40,6 +46,7 @@ const AdminDisplay = () => {
                 {componentMap[activeComponent]}
             </main>
         </div>
+        {notificationActive && <Notification onClose={handleNotificationClose} />}
     </div>
   )
 }

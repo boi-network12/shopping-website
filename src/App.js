@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import Home from './Pages/Home/Home';
 import Profile from './Pages/profile/profile';
 import AdminDisplay from './Pages/AdminDisplay/AdminDisplay';
+import PrivateRoute from './private/PrivateRoute';
 
 function App() {
   return (
@@ -13,10 +14,10 @@ function App() {
         <Route path='/' element={<Home/>} />
 
         
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile' element={<PrivateRoute element={<Profile />}/>} />
 
         {/* Admin */}
-        <Route path='/admin-dashboard' element={<AdminDisplay />} />
+        <Route path='/admin-dashboard' element={<PrivateRoute element={<AdminDisplay />} />} />
       </Routes>
     </Router>
   );

@@ -1,0 +1,95 @@
+.NotificationWrapper {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1200;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.NotificationBox {
+    width: 45%;
+    max-width: 450px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    overflow: hidden;
+}
+
+.NotificationHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgb(170, 203, 214), #739cb8);
+    color: #fff;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.CloseIcon {
+    cursor: pointer;
+    font-size: 22px;
+    transition: 0.3s;
+}
+
+.CloseIcon:hover {
+    color: #ff4747;
+}
+
+.NotificationContent {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.NotificationItem {
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.NotificationItem.Unread {
+    background: #e3f2fd;
+}
+
+.NotificationItem.Read {
+    opacity: 0.7;
+}
+
+.NotificationActions {
+    display: flex;
+    gap: 10px;
+}
+
+.MarkAsRead, .DeleteIcon {
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.MarkAsRead:hover {
+    color: green;
+}
+
+.DeleteIcon:hover {
+    color: red;
+}
+
+.NoNotification {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    color: #666;
+}

@@ -3,7 +3,7 @@ import "./AdminHeader.css"
 import { BiBell, BiEnvelope, BiSearch } from "react-icons/bi"
 import { AuthContext } from '../../context/AuthContext'
 
-const AdminHeader = () => {
+const AdminHeader = ({ setNotificationActive  }) => {
     const { user } = useContext(AuthContext);
 
   return (
@@ -14,7 +14,7 @@ const AdminHeader = () => {
             <input type="text" placeholder='search' />
         </div>
         <div className='textIconModel'>
-            <p className='ModelClick'>
+            <p className='ModelClick' onClick={() => setNotificationActive(prev => !prev)}>
                 <span>notifications</span>
                 <BiBell size={20} color='#333' />
             </p>
