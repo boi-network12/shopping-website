@@ -1,21 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Settings.css";
 import { BiEdit, BiLock, BiMoon, BiSun, BiBell, BiTrash } from "react-icons/bi";
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom"
 
 const Settings = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [notifications, setNotifications] = useState(true);
+  const { user, deleteAccount } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const handleDelete = async () => {
+    await deleteAccount();
+    navigate("/")
+};
 
   return (
     <div className={`settings-container ${darkMode ? "dark-mode" : ""}`}>
       {/* Profile Section */}
       <div className="profile-section">
-        <img src="https://via.placeholder.com/80" alt="User Avatar" className="avatar" />
+        <img src={require("../../assets/image/avatar.png")} alt="User Avatar" className="avatar" />
         <div>
-          <h3>John Doe</h3>
-          <p>johndoe@example.com</p>
+          <h3>{user && user.role === "admin" && user.name}</h3>
+          <p>{user && user.email}</p>
         </div>
-        <button className="edit-btn">
+        <button className="edit-btn" onClick={() => navigate("/profile")}>
           <BiEdit /> Edit Profile
         </button>
       </div>
@@ -31,7 +40,7 @@ const Settings = () => {
           <BiBell className="icon" />
           <span>Two-Factor Authentication</span>
         </div>
-        <div className="setting-item delete">
+        <div className="setting-item delete" onClick={handleDelete}>
           <BiTrash className="icon" />
           <span>Delete Account</span>
         </div>

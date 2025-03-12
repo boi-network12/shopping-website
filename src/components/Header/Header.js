@@ -1,9 +1,21 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./Header.css"
-import { BiCart, BiSearch } from "react-icons/bi"
+import { BiCart, BiSearch, BiUser } from "react-icons/bi"
+import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from "react-router-dom"
 
 const Header = ({setIsAuthModalOpen, setIsCatModalOpen}) => {
     const [isSearchActive, setIsSearchActive] = useState(false);
+    const { user } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    const handleUserNavigation = () => {
+        if (user?.role === "admin") {
+            navigate("/admin-dashboard");
+        } else {
+            navigate("/profile");
+        }
+    };
 
   return (
     <div className={`HeaderWrapper ${isSearchActive ? "hideElements" : ""}`} >
@@ -22,9 +34,17 @@ const Header = ({setIsAuthModalOpen, setIsCatModalOpen}) => {
                 />
                 <BiSearch size={22}/>
             </div>
-            <p onClick={() => setIsAuthModalOpen(true)} style={{ cursor: "pointer" }} className='a' >
-               <p>Login</p>
-            </p>
+            {!user ? (
+                <p onClick={() => setIsAuthModalOpen(true)} style={{ cursor: "pointer" }} className='a' >
+                Login
+             </p>
+            ) : (
+                <BiUser size={22} 
+                color='#333' 
+                onClick={handleUserNavigation} 
+                style={{ cursor: "pointer" }} 
+                />
+            )}
             <p onClick={() => setIsCatModalOpen(true)} className='CartContainer'>
                 <BiCart size={25} color='#333' />
                 <span>cart</span>

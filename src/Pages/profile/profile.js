@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Profile.css";
 import Header from "../../components/Header/Header";
 import Auth from "../../auth/Auth";
@@ -6,11 +6,15 @@ import { BiBox, BiLogOut, BiStar, BiUserCircle } from "react-icons/bi";
 import AccountDetails from "../../components/AccountDetails/AccountDetails";
 import MyOrders from "../../components/MyOrders/MyOrders";
 import PendingReviews from "../../components/PendingReviews/PendingReviews";
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+    const { logout } = useContext(AuthContext)
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const [activeSection, setActiveSection] = useState(null); 
     const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
+    const navigate = useNavigate()
 
     useEffect(() => {
         // Detect screen size change
@@ -38,6 +42,11 @@ const Profile = () => {
             window.history.pushState({}, "", "#section"); // Push a new state to enable back navigation
         }
     };
+
+    const handleLogout = () => {
+        navigate("/")
+        logout();
+    }
 
     return (
         <div className="profile-container">
@@ -67,7 +76,9 @@ const Profile = () => {
                             >
                                 <BiStar color="#148114" size={22} /> Pending Reviews
                             </li>
-                            <li className="logout">
+                            <li className="logout"
+                               onClick={handleLogout}
+                            >
                                 <BiLogOut color="red" size={22} /> Logout
                             </li>
                         </ul>

@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "./AdminHeader.css"
 import { BiBell, BiEnvelope, BiSearch } from "react-icons/bi"
+import { AuthContext } from '../../context/AuthContext'
 
 const AdminHeader = () => {
+    const { user } = useContext(AuthContext);
+
   return (
     <div className='AdminHeaderWrapper'>
         <img className='logo' src={require("../../assets/image/logo.jpeg")} alt="" />
@@ -23,8 +26,8 @@ const AdminHeader = () => {
         <div className='UserData'>
             <img src={require("../../assets/image/avatar.png")}  alt="" />
             <div className='UserNameDictate'>
-                <p>Adam lisa</p>
-                <span>admin</span>
+                <p>{user && user.role === "admin" && user.name}</p>
+                <span>{user && user.role === "admin" && user.role}</span>
             </div>
         </div>
     </div>
