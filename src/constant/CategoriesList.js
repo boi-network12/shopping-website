@@ -40,3 +40,16 @@ export const CategoriesList = [
         value: "undergarments-lingerie"
     }
 ];
+
+export const CategoriesPost = [
+    "Men's Clothing",
+    "Women's Clothing",
+    "Kids' Clothing",
+    "Footwear",
+    "Accessories",
+    "Activewear",
+    "Traditional Wear",
+    "Winter Wear",
+    "Summer Wear",
+    "Undergarments & Lingerie"
+];
