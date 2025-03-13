@@ -1,18 +1,22 @@
 // NotificationContext.js
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import { API_URL } from "../config/config";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "./AuthContext";
 
 export const NotificationContext = createContext();
 
 export const NotificationProvider = ({ children }) => {
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { user } = useContext(AuthContext)
 
     useEffect(() => {
-        fetchNotifications();
-    }, []);
+        if (user) {
+            fetchNotifications();
+        }
+    }, [user]);
 
     const fetchNotifications = async () => {
         try {
