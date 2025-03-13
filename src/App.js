@@ -5,6 +5,7 @@ import Home from './Pages/Home/Home';
 import Profile from './Pages/profile/profile';
 import AdminDisplay from './Pages/AdminDisplay/AdminDisplay';
 import PrivateRoute from './private/PrivateRoute';
+import ProductsPage from './Pages/ProductsPage/ProductsPage';
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>} />
 
-        
+        {/* protected route */}
         <Route path='/profile' element={<PrivateRoute element={<Profile />}/>} />
+        <Route path='/products-details/:productId' element={<PrivateRoute element={<ProductsPage/>}/>} />
 
         {/* Admin */}
         <Route path='/admin-dashboard' element={<PrivateRoute element={<AdminDisplay />} />} />
