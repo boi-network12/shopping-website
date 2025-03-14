@@ -71,16 +71,16 @@ const Pagination = () => {
       )}
 
       {isAuthModalOpen && <Auth onClose={() => setIsAuthModalOpen(false)}/>}
+      {isProductModalOpen && <ProductsDetails onClose={() => setIsProductModalOpen(false)} product={products} />}
 
-      {totalPages > 1 && (
+      {totalPages > 1 && products.length > 4 && (
         <div className="pagination-controls">
           <button onClick={handlePrevPage} disabled={currentPage === 1}>&larr;</button>
           <span>{currentPage}</span>
           <button onClick={handleNextPage} disabled={currentPage === totalPages}>&rarr;</button>
         </div>
       )}
-
-      {isProductModalOpen && <ProductsDetails onClose={() => setIsProductModalOpen(false)} product={products} />}
+      
     </div>
   );
 };
