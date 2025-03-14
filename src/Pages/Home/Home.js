@@ -11,6 +11,7 @@ import CatDisplay from '../../components/CatDisplay/CatDisplay'
 const Home = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isCatModelOpen, setIsCatModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
 
   
@@ -21,11 +22,11 @@ const Home = () => {
         <HeroBg/>
       </section>
       <section>
-        <Categories/>
+      <Categories setSelectedCategory={setSelectedCategory} />
       </section>
       <section>
         {/* pagination numbering */}
-        <Pagination/>
+        <Pagination selectedCategory={selectedCategory} />
       </section>
       <section style={{ width: "100%"}}>
         <Footer/>

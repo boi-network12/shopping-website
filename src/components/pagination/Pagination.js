@@ -7,27 +7,38 @@ import { useNavigate } from 'react-router-dom';
 import Auth from '../../auth/Auth';
 import ProductsDetails from '../../Modal/ProductsDetails';
 
-const Pagination = () => {
+const Pagination = ({selectedCategory}) => {
   const { user } = useContext(AuthContext);
   const { fetchProducts, products } = useContext(ProductsContext);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
-  const navigate = useNavigate()
+  const itemsPerPage = 4; // Show only 4 products per page
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
-  // Calculate total pages
-  const totalPages = Math.ceil((products?.length || 0) / itemsPerPage);
+  useEffect(() => {
+    if (selectedCategory === "All") {
+      setFilteredProducts(products);
+    } else {
+      const filtered = products.filter(product =>
+        product.category.includes(selectedCategory)
+      );
+      setFilteredProducts(filtered);
+    }
+  }, [products, selectedCategory]);
 
-  // Get current page products
+  // Total number of pages
+  const totalPages = Math.ceil((filteredProducts?.length || 0) / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentProducts = Array.isArray(products) ? products.slice(indexOfFirstItem, indexOfLastItem) : [];
+  const currentProducts = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
 
+  // Handle page navigation
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(prev => prev + 1);
@@ -42,12 +53,12 @@ const Pagination = () => {
 
   const handleFullDetails = (product) => {
     if (user) {
-      navigate(`/products-details/${product._id}`, { state: { product }});
+      navigate(`/products-details/${product._id}`, { state: { product } });
     } else {
-      setIsAuthModalOpen(true)
+      setIsAuthModalOpen(true);
     }
   };
-  
+
   return (
     <div className="pagination-wrapper">
       {currentProducts.length === 0 ? (
@@ -70,17 +81,21 @@ const Pagination = () => {
         </div>
       )}
 
-      {isAuthModalOpen && <Auth onClose={() => setIsAuthModalOpen(false)}/>}
+      {isAuthModalOpen && <Auth onClose={() => setIsAuthModalOpen(false)} />}
       {isProductModalOpen && <ProductsDetails onClose={() => setIsProductModalOpen(false)} product={products} />}
 
-      {totalPages > 1 && products.length > 4 && (
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
         <div className="pagination-controls">
-          <button onClick={handlePrevPage} disabled={currentPage === 1}>&larr;</button>
-          <span>{currentPage}</span>
-          <button onClick={handleNextPage} disabled={currentPage === totalPages}>&rarr;</button>
+          <button onClick={handlePrevPage} disabled={currentPage === 1}>
+            &larr;
+          </button>
+          <span> {currentPage} / {totalPages}</span>
+          <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+             &rarr;
+          </button>
         </div>
       )}
-      
     </div>
   );
 };

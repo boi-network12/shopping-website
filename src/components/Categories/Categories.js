@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Categories.css";
 import { CategoriesList } from "../../constant/CategoriesList";
 
-const Categories = () => {
+const Categories = ({ setSelectedCategory }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [activeCategory, setActiveCategory] = useState("All");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -18,7 +18,8 @@ const Categories = () => {
 
   const handleCategoryClick = (category) => {
     setActiveCategory(category);
-    setShowDropdown(false); // Close dropdown after selecting
+    setSelectedCategory(category); // Update selected category in Home
+    setShowDropdown(false);
   };
 
   return (
@@ -28,7 +29,7 @@ const Categories = () => {
           <div className="BiggerSizeCat">
             <p
               className={activeCategory === "All" ? "active" : ""}
-              onClick={() => setActiveCategory("All")}
+              onClick={() => handleCategoryClick("All")}
             >
               All
             </p>
@@ -36,7 +37,7 @@ const Categories = () => {
               <p
                 key={index}
                 className={activeCategory === category.label ? "active" : ""}
-                onClick={() => setActiveCategory(category.label)}
+                onClick={() => handleCategoryClick(category.label)}
               >
                 {category.label}
               </p>
