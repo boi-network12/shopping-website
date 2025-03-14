@@ -12,21 +12,31 @@ const Home = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isCatModelOpen, setIsCatModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
 
 
   
   return (
     <div className='HomeWrapper'>
-      <Header setIsAuthModalOpen={setIsAuthModalOpen} setIsCatModalOpen={setIsCatModalOpen} />
-      <section style={{ width: "100%" }}>
-        <HeroBg/>
-      </section>
-      <section>
-      <Categories setSelectedCategory={setSelectedCategory} />
-      </section>
+      <Header 
+         setIsAuthModalOpen={setIsAuthModalOpen} 
+         setIsCatModalOpen={setIsCatModalOpen} 
+         setSearchQuery={setSearchQuery}
+        />
+
+      {!searchQuery && (
+        <>
+           <section style={{ width: "100%" }}>
+              <HeroBg/>
+            </section>
+            <section>
+               <Categories setSelectedCategory={setSelectedCategory} />
+            </section>
+        </>
+      )}
       <section>
         {/* pagination numbering */}
-        <Pagination selectedCategory={selectedCategory} />
+        <Pagination selectedCategory={selectedCategory} searchQuery={searchQuery} />
       </section>
       <section style={{ width: "100%"}}>
         <Footer/>

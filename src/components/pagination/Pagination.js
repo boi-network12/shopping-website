@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Auth from '../../auth/Auth';
 import ProductsDetails from '../../Modal/ProductsDetails';
 
-const Pagination = ({selectedCategory}) => {
+const Pagination = ({ selectedCategory, searchQuery  }) => {
   const { user } = useContext(AuthContext);
   const { fetchProducts, products } = useContext(ProductsContext);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -22,15 +22,24 @@ const Pagination = ({selectedCategory}) => {
   }, [fetchProducts]);
 
   useEffect(() => {
-    if (selectedCategory === "All") {
-      setFilteredProducts(products);
-    } else {
-      const filtered = products.filter(product =>
+    let updatedProducts = products;
+
+    // Filter by category
+    if (selectedCategory !== "All") {
+      updatedProducts = updatedProducts.filter(product =>
         product.category.includes(selectedCategory)
       );
-      setFilteredProducts(filtered);
     }
-  }, [products, selectedCategory]);
+
+    // Filter by search query
+    if (searchQuery) {
+      updatedProducts = updatedProducts.filter(product =>
+        product.productName.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    setFilteredProducts(updatedProducts);
+  }, [products, selectedCategory, searchQuery]);
 
   // Total number of pages
   const totalPages = Math.ceil((filteredProducts?.length || 0) / itemsPerPage);

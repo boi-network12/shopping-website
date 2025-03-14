@@ -4,7 +4,7 @@ import { BiCart, BiSearch, BiUser } from "react-icons/bi"
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from "react-router-dom"
 
-const Header = ({setIsAuthModalOpen, setIsCatModalOpen}) => {
+const Header = ({setIsAuthModalOpen, setIsCatModalOpen, setSearchQuery }) => {
     const [isSearchActive, setIsSearchActive] = useState(false);
     const { user } = useContext(AuthContext)
     const navigate = useNavigate()
@@ -27,9 +27,10 @@ const Header = ({setIsAuthModalOpen, setIsCatModalOpen}) => {
                  onClick={() => setIsSearchActive(true)}
             >
                 <input 
-                    type="text" 
+                    type="search" 
                     placeholder='search'
                     autoFocus
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     onBlur={() => setIsSearchActive(false)}
                 />
                 <BiSearch size={22}/>
