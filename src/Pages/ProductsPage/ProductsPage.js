@@ -16,6 +16,8 @@ const ProductsPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState(""); 
   const [selectedSize, setSelectedSize] = useState("");   
+  const [searchQuery, setSearchQuery] = useState(false);
+  
 
   // Redirect if product data is missing
   useEffect(() => {
@@ -23,6 +25,7 @@ const ProductsPage = () => {
       navigate('/');
     }
   }, [product, navigate]);
+
 
   if (!product) {
     return null;
@@ -76,12 +79,18 @@ const ProductsPage = () => {
     setSelectedSize(e.target.value);
   };
 
+  
+
   return (
     <div className='productsPage-container'>
-      <Header setIsAuthModalOpen={setIsAuthModalOpen} setIsCatModalOpen={setIsCatModalOpen} />
+      <Header 
+         setIsAuthModalOpen={setIsAuthModalOpen} 
+         setIsCatModalOpen={setIsCatModalOpen} 
+         setSearchQuery={setSearchQuery}
+          />
       
       <div className='productsPage-wrapper'>
-        <div className='productPage-image'>
+        <div className='productPage-image' searchQuery={searchQuery}>
           <img src={product.image} alt={product.productName} />
         </div>
         <div className='product-details'>
