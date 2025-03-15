@@ -16,7 +16,7 @@ const ProductsPage = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState(""); 
   const [selectedSize, setSelectedSize] = useState("");   
-  const [searchQuery, setSearchQuery] = useState(false);
+  const [ setSearchQuery] = useState(false);
   
 
   // Redirect if product data is missing
@@ -50,7 +50,7 @@ const ProductsPage = () => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
   
     // Create a unique identifier based on product ID, selected color, and size
-    const uniqueId = `${product.id}-${selectedColor}-${selectedSize}`;
+    const uniqueId = `${product._id}`;
   
     const existingProductIndex = cart.findIndex(item => item.uniqueId === uniqueId);
   
@@ -90,7 +90,7 @@ const ProductsPage = () => {
           />
       
       <div className='productsPage-wrapper'>
-        <div className='productPage-image' searchQuery={searchQuery}>
+        <div className='productPage-image' >
           <img src={product.image} alt={product.productName} />
         </div>
         <div className='product-details'>
@@ -113,9 +113,10 @@ const ProductsPage = () => {
             <label>Size</label>
             <select value={selectedSize} onChange={handleSizeChange}>
               <option value="">Select Size</option>
-              <option value="s">Small</option>
-              <option value="m">Medium</option>
-              <option value="l">Large</option>
+              <option value="s">S</option>
+              <option value="m">M</option>
+              <option value="l">l</option>
+              <option value="Xl">Xl</option>
             </select>
           </div>
         </div>

@@ -16,9 +16,63 @@
 
     p{
         font-size: 1.5rem;
-        color: #fff;
+        color: #fff;.HeroBgWrapper {
+            width: 100%;
+            background: #148114; /* Default background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 18rem;
+            justify-content: center;
+        }
+        
+        .HeroBgWrapper h1 {
+            color: #fff;
+            font-size: 3rem;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+        
+        .HeroBgWrapper p {
+            font-size: 1.5rem;
+            color: #fff;
+            text-transform: capitalize;
+        }
+        
+        /* Black background for Checkout page */
+        .HeroBgWrapper.checkoutBg {
+            background: #000;
+        }
+        
+        /* Tablets (768px - 1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .HeroBgWrapper {
+                height: 12rem;
+            }
+        }
+        
+        /* Mobile devices */
+        @media (max-width: 767px) {
+            .HeroBgWrapper {
+                height: 10rem;
+            }
+        
+            .HeroBgWrapper h1 {
+                font-size: 1.8rem;
+            }
+        
+            .HeroBgWrapper p {
+                font-size: 0.9rem;
+            }
+        }
+        
         text-transform: capitalize;
     }
+}
+
+/* Black background for Checkout page */
+.HeroBgWrapper.checkoutBg {
+    background: #000;
 }
 
 

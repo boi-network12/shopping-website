@@ -1,13 +1,17 @@
-import React from 'react'
-import "./HeroBg.css"
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import "./HeroBg.css";
 
 const HeroBg = () => {
-  return (
-    <div className='HeroBgWrapper'>
-        <h1>Welcome to</h1>
-        <p>Store</p>
-    </div>
-  )
-}
+  const location = useLocation();
+  const isCheckoutPage = location.pathname === "/checkout";
 
-export default HeroBg
+  return (
+    <div className={`HeroBgWrapper ${isCheckoutPage ? "checkoutBg" : ""}`}>
+      <h1>{isCheckoutPage ? "Checkout" : "Welcome to"}</h1>
+      {!isCheckoutPage && <p>Store</p>}
+    </div>
+  );
+};
+
+export default HeroBg;

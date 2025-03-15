@@ -14,10 +14,10 @@
     top: 0;right: 0;
     background: #fff;
     width: 100%;
-    max-width: 730px;
+    max-width: 700px;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 40px 20px 20px;
 }
 
 .CatDisplayWrapper .CatDisplayContainer .BtnCancel{
@@ -41,7 +41,7 @@
         cursor: pointer;
 
         &:hover{
-            background: #fdefef;
+            color: red;
         }
     }
 }
@@ -81,57 +81,174 @@
     }
 }
 
-.CartDisplay {
-    max-height: 300px;
-    overflow-y: auto;
-    padding: 10px 0;
-}
-
-.cart-item {
+.CartDisplay{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    justify-content: center;
     width: 100%;
+    flex-direction: column;
+    margin: 30px 0;
 }
 
-.cart-img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 5px;
+
+.CartDisplay .cart-item{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    justify-content: space-between;
+    height: 130px;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+
+    .CartInfo{
+        width: 40%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 15px;
+
+        img{
+            width: 90px;
+            aspect-ratio: 1.2;
+            object-fit: contain;
+        }
+
+        h4{
+            font-weight: 300;
+            color: #333;
+            font-size: 1.2rem;
+            display: flex;
+            flex-direction: column;
+
+            span{
+                font-weight: 300;
+                font-size: 0.9rem;
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    .cart-details{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-start;
+
+        .rightDiv{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+
+            > p{
+                font-weight: 500;
+                font-size: 1.1rem;
+            }
+        }
+
+        .remove-btn{
+            all: unset;
+            cursor: pointer;
+            font-weight: 300;
+            font-size: 1.05rem;
+            text-transform: capitalize;
+
+            &:hover{
+                color: red;
+            }
+        }
+    }
 }
 
-.cart-details {
-    flex: 1;
-    padding-left: 10px;
+.empty-cart{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    p{
+        font-weight: 500;
+        font-size: 1.2rem;
+        text-transform: capitalize;
+    }
+
+    span{
+        font-weight: 300;
+        font-size: 0.9rem;
+    }
+
+    button{
+        all: unset;
+        background: #148114;
+        width: 60%;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: capitalize;
+        color: #fff;
+        font-weight: 300;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-top: 10px;
+
+        &:hover{
+            opacity: 0.8;
+        }
+    }
 }
 
-.cart-details h4 {
-    margin: 0;
-    font-size: 1rem;
-}
+@media (max-width: 768px) {
+    .CartDisplay .cart-item{
+        height: 160px;
+    }
 
-.cart-details p {
-    margin: 3px 0;
-    font-size: 0.9rem;
-    color: #666;
-}
+    .CartInfo{
+        width: 70%;
+    }
 
-.remove-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 0.8rem;
-}
+    .rightDiv{
+        display: flex;
+        flex-direction: column !important;
 
-.empty-cart {
-    text-align: center;
-    font-size: 1rem;
-    color: #666;
-    padding: 20px 0;
+        .Add-minus{
+            width: 100%;
+        }
+
+        >p{
+            font-size: 0.9rem !important;
+            font-weight: 400;
+        }
+    }
+
+    .CartInfo .cart-item{
+        width: 50px;
+    }
+
+    .CartInfo h4{
+        display: flex;
+        flex-direction: column;
+
+        p{
+            flex-direction: row;
+            display: flex;
+            white-space: nowrap;
+            font-size: 0.85rem;
+        }
+
+        span{
+            display: flex;
+            flex-direction: row;
+            white-space: nowrap;
+            font-size: 0.6rem;
+        }
+    }
+
+    .CartInfo span{
+        font-size: 0.8rem;
+    }
 }

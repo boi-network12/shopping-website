@@ -6,6 +6,7 @@ import { ProductsContext } from '../../context/ProductsContext';
 import { useNavigate } from 'react-router-dom';
 import Auth from '../../auth/Auth';
 import ProductsDetails from '../../Modal/ProductsDetails';
+import { BiArrowToLeft, BiArrowToRight } from "react-icons/bi"
 
 const Pagination = ({ selectedCategory, searchQuery  }) => {
   const { user } = useContext(AuthContext);
@@ -97,11 +98,11 @@ const Pagination = ({ selectedCategory, searchQuery  }) => {
       {totalPages > 1 && (
         <div className="pagination-controls">
           <button onClick={handlePrevPage} disabled={currentPage === 1}>
-            &larr;
+            <BiArrowToLeft/>
           </button>
           <span> {currentPage} / {totalPages}</span>
           <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-             &rarr;
+             <BiArrowToRight/>
           </button>
         </div>
       )}

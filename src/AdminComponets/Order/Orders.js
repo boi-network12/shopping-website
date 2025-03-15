@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./Orders.css";
 import { BiInfoCircle } from "react-icons/bi";
+import { AuthContext } from '../../context/AuthContext';
+import { OrderContext } from '../../context/OrderContext';
+import { toast } from 'react-toastify';
+import LoadingDots from '../../Loading/LoadingDots ';
 
 const ordersData = [
     { id: 1, customer: "John Doe", email: "john@example.com", date: "2024-03-10", status: "Delivered", total: "$120", location: "New York, USA" },
@@ -10,6 +14,14 @@ const ordersData = [
 
 const Orders = () => {
     const [selectedOrder, setSelectedOrder] = useState(null);
+    const { user } = useContext(AuthContext);
+    const { orders, loading, getAllOrders, updateOrderStatus } = useContext(OrderContext);
+
+    useEffect(() => {
+        if (user && user.role === "admin") {
+          getAllOrders(); // Fetch all orders when the component mounts
+        }
+      }, [user, getAllOrders])
 
     const handleOpenModal = (order) => {
         setSelectedOrder(order);
@@ -18,6 +30,19 @@ const Orders = () => {
     const handleCloseModal = () => {
         setSelectedOrder(null);
     };
+
+    const handleStatusChange = async (orderId, newStatus) => {
+        try {
+          await updateOrderStatus(orderId, newStatus);
+          toast.success("Order status updated successfully");
+        } catch (error) {
+          toast.error("Failed to update order status");
+        }
+      };
+    
+      if (loading) {
+        return <LoadingDots/>
+      }
 
     return (
         <div className="orders-container">

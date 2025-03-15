@@ -6,6 +6,7 @@ import Profile from './Pages/profile/profile';
 import AdminDisplay from './Pages/AdminDisplay/AdminDisplay';
 import PrivateRoute from './private/PrivateRoute';
 import ProductsPage from './Pages/ProductsPage/ProductsPage';
+import Checkout from './Pages/Checkout/Checkout';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         {/* protected route */}
         <Route path='/profile' element={<PrivateRoute element={<Profile />}/>} />
         <Route path='/products-details/:productId' element={<PrivateRoute element={<ProductsPage/>}/>} />
+        <Route path='/checkout' element={<PrivateRoute element={<Checkout/>}/>} />
 
         {/* Admin */}
         <Route path='/admin-dashboard' element={<PrivateRoute element={<AdminDisplay />} />} />
