@@ -122,7 +122,7 @@ const Orders = () => {
                     </p>
                     <p>
                         <strong>Note: </strong>
-                        {selectedOrder.note}
+                        {selectedOrder.notes}
                     </p>
                     <p>
                     <strong>Address:</strong> {selectedOrder.shippingDetails.address},{" "}
