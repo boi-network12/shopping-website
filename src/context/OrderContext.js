@@ -104,8 +104,32 @@ export const OrderProvider = ({ children }) => {
         }
     };
 
+    // Delete Order (Admin only)
+    const deleteOrder = async (orderId) => {
+        setLoading(true);
+        try {
+            const response = await fetch(`${API_URL}/orders/${orderId}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message);
+
+            setOrders((prev) => prev.filter((order) => order._id !== orderId));
+            toast.success("Order deleted successfully");
+        } catch (error) {
+            console.error("Delete Order Error:", error);
+            toast.error(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
-        <OrderContext.Provider value={{ orders, loading, createOrder, getUserOrders, getAllOrders, updateOrderStatus }}>
+        <OrderContext.Provider value={{ orders, loading, createOrder, getUserOrders, getAllOrders, updateOrderStatus, deleteOrder }}>
             {children}
         </OrderContext.Provider>
     );

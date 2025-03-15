@@ -9,7 +9,7 @@ import LoadingDots from '../../Loading/LoadingDots ';
 const Orders = () => {
     const [selectedOrder, setSelectedOrder] = useState(null);
     const { user } = useContext(AuthContext);
-    const { orders, getAllOrders, updateOrderStatus } = useContext(OrderContext);
+    const { orders, getAllOrders, updateOrderStatus, deleteOrder  } = useContext(OrderContext);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -41,6 +41,12 @@ const Orders = () => {
     if (loading) {
         return <LoadingDots />;
     }
+
+    const handleDelete = async (orderId) => {
+        if (window.confirm("Are you sure you want to delete this order?")) {
+            await deleteOrder(orderId);
+        }
+    };
 
     return (
         <div className="orders-container">
@@ -89,6 +95,7 @@ const Orders = () => {
                                 <BiTrashAlt
                                     className="info-icon"
                                     color='red'
+                                    onClick={() => handleDelete(order._id)}
                                 />
                             </td>
                         </tr>
