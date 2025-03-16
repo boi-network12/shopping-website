@@ -10,6 +10,7 @@
     background: #fff;
     transition: all 0.2s ease-in-out;
     z-index: 1000;
+    height: 100px;
 }
 
 .HeaderWrapper.hideElements img,
@@ -19,8 +20,8 @@
 }
 
 .HeaderWrapper > img {
-    width: 25%;
-    height: 90px;
+    width: 60px;
+    aspect-ratio: 1.1;
     object-fit: contain;
 }
 
