@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Transactions.css";
 import { BiSearch, BiCheckCircle, BiXCircle, BiTimeFive } from "react-icons/bi";
-
-const initialTransactions = [
-  { id: 1, sender: "John Doe", recipient: "Jane Smith", amount: 500, status: "Completed", date: "2025-03-10" },
-  { id: 2, sender: "Alice Brown", recipient: "Mark Wilson", amount: 250, status: "Pending", date: "2025-03-09" },
-  { id: 3, sender: "David Lee", recipient: "Chris Evans", amount: 1000, status: "Failed", date: "2025-03-08" },
-  { id: 4, sender: "Sarah Connor", recipient: "Tom Hardy", amount: 700, status: "Completed", date: "2025-03-07" },
-];
+import { OrderContext } from "../../context/OrderContext";
 
 const Transactions = () => {
-  const [transactions] = useState(initialTransactions);
+  const { transactions, getAllTransactions } = useContext(OrderContext); // Use context
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading] = useState(false);
 
-  const filteredTransactions = transactions.filter((transaction) =>
-    transaction.sender.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    transaction.recipient.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    transaction.status.toLowerCase().includes(searchTerm.toLowerCase())
+  // Fetch all transactions on component mount
+  useEffect(() => {
+    getAllTransactions();
+  }, [getAllTransactions]);
+
+  // Filter transactions based on search term
+  const filteredTransactions = transactions.filter(
+    (transaction) =>
+      transaction.sender?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      transaction.recipient?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      transaction.status?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Get status icon based on transaction status
   const getStatusIcon = (status) => {
     switch (status) {
       case "Completed":
@@ -32,12 +35,10 @@ const Transactions = () => {
     }
   };
 
-  
-
   return (
     <div className="transactions-container">
       <div className="header">
-        <h2 className="transactions-title" >Transactions</h2>
+        <h2 className="transactions-title">Transactions</h2>
         <div className="search-bar">
           <BiSearch className="search-icon" />
           <input
@@ -49,37 +50,43 @@ const Transactions = () => {
         </div>
       </div>
 
-      <table className="transactions-table">
-        <thead>
-          <tr>
-            <th>Sender</th>
-            <th>Recipient</th>
-            <th>Amount</th>
-            <th>Status</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredTransactions.length > 0 ? (
-            filteredTransactions.map((transaction) => (
-              <tr key={transaction.id}>
-                <td>{transaction.sender}</td>
-                <td>{transaction.recipient}</td>
-                <td>${transaction.amount}</td>
-                <td className="status-cell">
-                  {getStatusIcon(transaction.status)}
-                  {transaction.status}
-                </td>
-                <td>{transaction.date}</td>
-              </tr>
-            ))
-          ) : (
+      {loading ? (
+        <p className="loading">Loading transactions...</p>
+      ) : (
+        <table className="transactions-table">
+          <thead>
             <tr>
-              <td colSpan="5" className="no-results">No transactions found.</td>
+              <th>Sender</th>
+              <th>Recipient</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Date</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredTransactions.length > 0 ? (
+              filteredTransactions.map((transaction) => (
+                <tr key={transaction._id}>
+                  <td>{transaction.sender}</td>
+                  <td>{transaction.recipient}</td>
+                  <td>${transaction.amount}</td>
+                  <td className="status-cell">
+                    {getStatusIcon(transaction.status)}
+                    {transaction.status}
+                  </td>
+                  <td>{new Date(transaction.createdAt).toLocaleDateString()}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="no-results">
+                  No transactions found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

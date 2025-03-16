@@ -6,6 +6,7 @@ export const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
     const [orders, setOrders] = useState([]);
+    const [transactions, setTransactions] = useState([])
     const [loading, setLoading] = useState(false);
 
     const token = localStorage.getItem("token");
@@ -128,8 +129,60 @@ export const OrderProvider = ({ children }) => {
         }
     };
 
+    // Get All Transactions (Admin only)
+    const getAllTransactions = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch(`${API_URL}/transactions`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message);
+
+            setTransactions(data); // Set transactions state
+        } catch (error) {
+            console.error("Fetch Transactions Error:", error);
+            toast.error(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Get Logged-in User's Transactions
+    const getUserTransactions = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch(`${API_URL}/transactions/user`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message);
+
+            setTransactions(data); // Set transactions state
+        } catch (error) {
+            console.error("Fetch User Transactions Error:", error);
+            toast.error(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
-        <OrderContext.Provider value={{ orders, loading, createOrder, getUserOrders, getAllOrders, updateOrderStatus, deleteOrder }}>
+        <OrderContext.Provider 
+            value={{ 
+                 orders, 
+                 transactions,
+                 loading, 
+                 createOrder, 
+                 getUserOrders, 
+                 getAllOrders, 
+                 updateOrderStatus, 
+                 deleteOrder ,
+                 getAllTransactions,
+                 getUserTransactions
+            }}>
             {children}
         </OrderContext.Provider>
     );
