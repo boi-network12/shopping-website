@@ -1,18 +1,31 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { API_URL } from "../config/config";
+import { AuthContext } from "./AuthContext";
 
 export const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
     const [orders, setOrders] = useState([]);
-    const [transactions, setTransactions] = useState([])
+    const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(false);
+    const { user } = useContext(AuthContext);
 
     const token = localStorage.getItem("token");
 
+    // Helper function to check if a user is logged in
+    const checkUser = () => {
+        if (!user || !token) {
+            toast.error("You must be logged in to perform this action.");
+            return false;
+        }
+        return true;
+    };
+
     // Create Order
     const createOrder = async (orderData) => {
+        if (!checkUser()) return;
+
         setLoading(true);
         try {
             const response = await fetch(`${API_URL}/orders`, {
@@ -39,6 +52,8 @@ export const OrderProvider = ({ children }) => {
 
     // Get Logged-in User's Orders
     const getUserOrders = async () => {
+        if (!checkUser()) return;
+
         setLoading(true);
         try {
             const response = await fetch(`${API_URL}/orders/user`, {
@@ -46,12 +61,12 @@ export const OrderProvider = ({ children }) => {
             });
 
             const data = await response.json();
-            if (!response.ok) throw new Error(data.message);
+            if (!response.ok) throw new Error(data.message || "Failed to fetch orders");
 
-            setOrders(data);
+            setOrders(data); 
         } catch (error) {
-            console.error("Fetch Orders Error:", error);
-            toast.error(error.message);
+            console.error("Fetch User Orders Error:", error);
+            toast.error(error.message || "Failed to fetch orders");
         } finally {
             setLoading(false);
         }
@@ -59,6 +74,8 @@ export const OrderProvider = ({ children }) => {
 
     // Get All Orders (Admin only)
     const getAllOrders = async () => {
+        if (!checkUser()) return;
+
         setLoading(true);
         try {
             const response = await fetch(`${API_URL}/orders`, {
@@ -79,6 +96,8 @@ export const OrderProvider = ({ children }) => {
 
     // Update Order Status (Admin only)
     const updateOrderStatus = async (orderId, status) => {
+        if (!checkUser()) return;
+
         setLoading(true);
         try {
             const response = await fetch(`${API_URL}/orders/${orderId}/status`, {
@@ -107,6 +126,8 @@ export const OrderProvider = ({ children }) => {
 
     // Delete Order (Admin only)
     const deleteOrder = async (orderId) => {
+        if (!checkUser()) return;
+
         setLoading(true);
         try {
             const response = await fetch(`${API_URL}/orders/${orderId}`, {
@@ -131,6 +152,8 @@ export const OrderProvider = ({ children }) => {
 
     // Get All Transactions (Admin only)
     const getAllTransactions = async () => {
+        if (!checkUser()) return;
+
         setLoading(true);
         try {
             const response = await fetch(`${API_URL}/transactions`, {
@@ -151,6 +174,8 @@ export const OrderProvider = ({ children }) => {
 
     // Get Logged-in User's Transactions
     const getUserTransactions = async () => {
+        if (!checkUser()) return;
+
         setLoading(true);
         try {
             const response = await fetch(`${API_URL}/transactions/user`, {
@@ -170,19 +195,20 @@ export const OrderProvider = ({ children }) => {
     };
 
     return (
-        <OrderContext.Provider 
-            value={{ 
-                 orders, 
-                 transactions,
-                 loading, 
-                 createOrder, 
-                 getUserOrders, 
-                 getAllOrders, 
-                 updateOrderStatus, 
-                 deleteOrder ,
-                 getAllTransactions,
-                 getUserTransactions
-            }}>
+        <OrderContext.Provider
+            value={{
+                orders,
+                transactions,
+                loading,
+                createOrder,
+                getUserOrders,
+                getAllOrders,
+                updateOrderStatus,
+                deleteOrder,
+                getAllTransactions,
+                getUserTransactions,
+            }}
+        >
             {children}
         </OrderContext.Provider>
     );

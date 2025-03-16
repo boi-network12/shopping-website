@@ -12,16 +12,7 @@ import Settings from '../../AdminComponets/Settings/Settings'
 import Help from '../../AdminComponets/Help/Help'
 import Notification from '../../AdminComponets/Notification/Notification'
 
-const componentMap = {
-    "Dashboard": <Dashboard />,
-    "Customers": <Customer/>,
-    "Orders": <Orders/>,
-    "Products": <Products/>,
-    "Brands": <Brands/>,
-    "Transactions": <Transactions/>,
-    "Settings": <Settings/>,
-    "Help": <Help/>
-  };
+
 
 const AdminDisplay = () => {
     const [activeComponent, setActiveComponent] = useState("Dashboard");
@@ -30,6 +21,17 @@ const AdminDisplay = () => {
     const handleNotificationClose = () => {
       setNotificationActive(false)
     }
+
+    const componentMap = {
+      "Dashboard": <Dashboard setActiveComponent={setActiveComponent} />,
+      "Customers": <Customer/>,
+      "Orders": <Orders/>,
+      "Products": <Products/>,
+      "Brands": <Brands/>,
+      "Transactions": <Transactions/>,
+      "Settings": <Settings/>,
+      "Help": <Help/>
+    };
 
 
   return (

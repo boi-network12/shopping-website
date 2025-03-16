@@ -5,15 +5,16 @@ import Auth from "../../auth/Auth";
 import { BiBox, BiLogOut, BiStar, BiUserCircle } from "react-icons/bi";
 import AccountDetails from "../../components/AccountDetails/AccountDetails";
 import MyOrders from "../../components/MyOrders/MyOrders";
-import PendingReviews from "../../components/PendingReviews/PendingReviews";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Transactions from "../../components/Transactions/Transactions";
 
 const Profile = () => {
     const { logout } = useContext(AuthContext)
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const [activeSection, setActiveSection] = useState(null); 
     const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
+    const [searchQuery, setSearchQuery] = useState("");
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -39,7 +40,7 @@ const Profile = () => {
     const handleSectionChange = (section) => {
         setActiveSection(section);
         if (isMobileView) {
-            window.history.pushState({}, "", "#section"); // Push a new state to enable back navigation
+            window.history.pushState({}, "", "#section"); 
         }
     };
 
@@ -50,7 +51,7 @@ const Profile = () => {
 
     return (
         <div className="profile-container">
-            <Header setIsAuthModalOpen={setIsAuthModalOpen} />
+            <Header setIsAuthModalOpen={setIsAuthModalOpen} setSearchQuery={setSearchQuery} />
             {isAuthModalOpen && <Auth onClose={() => setIsAuthModalOpen(false)} />}
 
             <div className="profile-content">
@@ -71,8 +72,8 @@ const Profile = () => {
                                 <BiBox color="#148114" size={22} /> My Orders
                             </li>
                             <li 
-                                className={activeSection === "reviews" ? "active" : ""} 
-                                onClick={() => handleSectionChange("reviews")}
+                                className={activeSection === "transactions" ? "active" : ""} 
+                                onClick={() => handleSectionChange("transactions")}
                             >
                                 <BiStar color="#148114" size={22} /> Pending Reviews
                             </li>
@@ -87,9 +88,9 @@ const Profile = () => {
 
                 {/* Main Content Area */}
                 <main className="account-details">
-                    {activeSection === "account" && <AccountDetails />}
-                    {activeSection === "orders" && <MyOrders />}
-                    {activeSection === "reviews" && <PendingReviews />}
+                {activeSection === "account" && <AccountDetails />}
+                    {activeSection === "orders" && <MyOrders searchQuery={searchQuery} />}
+                    {activeSection === "transactions" && <Transactions searchQuery={searchQuery} />}
                 </main>
             </div>
         </div>

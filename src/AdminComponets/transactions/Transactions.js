@@ -4,31 +4,30 @@ import { BiSearch, BiCheckCircle, BiXCircle, BiTimeFive } from "react-icons/bi";
 import { OrderContext } from "../../context/OrderContext";
 
 const Transactions = () => {
-  const { transactions, getAllTransactions } = useContext(OrderContext); // Use context
+  const { transactions, getAllTransactions } = useContext(OrderContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading] = useState(false);
 
-  // Fetch all transactions on component mount
   useEffect(() => {
     getAllTransactions();
   }, [getAllTransactions]);
 
-  // Filter transactions based on search term
   const filteredTransactions = transactions.filter(
     (transaction) =>
       transaction.sender?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       transaction.recipient?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      transaction.status?.toLowerCase().includes(searchTerm.toLowerCase())
+      transaction.status?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      transaction.type?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      transaction.createdBy?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Get status icon based on transaction status
   const getStatusIcon = (status) => {
     switch (status) {
-      case "Completed":
+      case "completed":
         return <BiCheckCircle className="status-icon completed" />;
-      case "Pending":
+      case "pending":
         return <BiTimeFive className="status-icon pending" />;
-      case "Failed":
+      case "failed":
         return <BiXCircle className="status-icon failed" />;
       default:
         return null;
@@ -56,10 +55,12 @@ const Transactions = () => {
         <table className="transactions-table">
           <thead>
             <tr>
+              <th>User Id</th>
               <th>Sender</th>
-              <th>Recipient</th>
               <th>Amount</th>
+              <th>Type</th>
               <th>Status</th>
+              <th>Created By</th>
               <th>Date</th>
             </tr>
           </thead>
@@ -67,19 +68,21 @@ const Transactions = () => {
             {filteredTransactions.length > 0 ? (
               filteredTransactions.map((transaction) => (
                 <tr key={transaction._id}>
-                  <td>{transaction.sender}</td>
-                  <td>{transaction.recipient}</td>
-                  <td>${transaction.amount}</td>
+                  <td>{transaction._id}</td>
+                  <td>{transaction.createdBy}</td>
+                  <td>₦{new Intl.NumberFormat().format(transaction.amount)}</td>
+                  <td>{transaction.type}</td>
                   <td className="status-cell">
                     {getStatusIcon(transaction.status)}
                     {transaction.status}
                   </td>
+                  <td>{transaction.createdBy}</td>
                   <td>{new Date(transaction.createdAt).toLocaleDateString()}</td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="no-results">
+                <td colSpan="7" className="no-results">
                   No transactions found.
                 </td>
               </tr>

@@ -1,4 +1,4 @@
-.HeaderWrapper{
+.HeaderWrapper {
     width: 100%;
     padding: 10px 3%;
     display: flex;
@@ -18,13 +18,13 @@
     display: none;
 }
 
-.HeaderWrapper > img{
+.HeaderWrapper > img {
     width: 25%;
     height: 90px;
     object-fit: contain;
 }
 
-.HeaderWrapper .SearchAuthContainer{
+.HeaderWrapper .SearchAuthContainer {
     display: flex;
     width: 70%;
     flex-direction: row;
@@ -41,18 +41,27 @@
     justify-content: center;
 }
 
-.HeaderWrapper .SearchAuthContainer.active .inputContainer{
+.HeaderWrapper .SearchAuthContainer.active .inputContainer {
     width: 100%;
-    max-width: 100%;
-
-    input{
-        width: 90%;
-    }
+    max-width: 800px;
+    background: #c8f7c5;
+    transition: all 0.3s ease-in-out;
 }
 
-.HeaderWrapper .SearchAuthContainer .inputContainer{
+.HeaderWrapper .SearchAuthContainer.active input {
+    width: 90%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+}
+
+.HeaderWrapper .SearchAuthContainer .inputContainer {
     max-width: 400px;
-    display: flex;align-items: center;
+    display: flex;
+    align-items: center;
     justify-content: flex-end;
     width: 100%;
     gap: 20px;
@@ -60,90 +69,92 @@
     height: 40px;
     padding: 0 10px;
     border-radius: 20px;
-
-    input{
-        all: unset;
-        width: 85%;
-        font-weight: 300;
-        font-size: 1rem;
-        height: 100%;
-    }
-
-    &.active{
-        background: #c8f7c5;
-        width: 100%;
-    }
+    transition: all 0.3s ease-in-out;
 }
 
-.HeaderWrapper .SearchAuthContainer  > .a{
+.HeaderWrapper .SearchAuthContainer .inputContainer input {
+    all: unset;
+    width: 85%;
+    font-weight: 300;
+    font-size: 1rem;
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.HeaderWrapper .SearchAuthContainer > .a {
     color: #333;
     text-decoration: none;
     font-weight: 300;
     font-size: 1rem;
-
-    &:hover{
-        color: green;
-    }
 }
 
-.HeaderWrapper .SearchAuthContainer > .CartContainer{
+.HeaderWrapper .SearchAuthContainer > .a:hover {
+    color: green;
+}
+
+.HeaderWrapper .SearchAuthContainer > .CartContainer {
     position: relative;
     height: 40px;
-    display: flex;align-items: center;
+    display: flex;
+    align-items: center;
     justify-content: center;
     border-radius: 50%;
     width: 40px;
-
-    &:hover{
-        background: #defade;
-    }
-
-    span{
-        position: absolute;
-        top: 80px;
-        background: #fff;
-        padding: 2px 10px;
-        border-radius: 3px;
-        letter-spacing: 0.1rem;
-        font-weight: 300;
-        display: none;
-        transition: display .3s ease;
-    }
-
-    &:hover span{
-        display: block;
-    }
 }
 
+.HeaderWrapper .SearchAuthContainer > .CartContainer:hover {
+    background: #defade;
+}
+
+.HeaderWrapper .SearchAuthContainer > .CartContainer span {
+    position: absolute;
+    top: 80px;
+    background: #fff;
+    padding: 2px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.1rem;
+    font-weight: 300;
+    display: none;
+    transition: display 0.3s ease;
+}
+
+.HeaderWrapper .SearchAuthContainer > .CartContainer:hover span {
+    display: block;
+}
 
 /* Tablets (768px - 1024px) */
 @media (min-width: 768px) and (max-width: 1024px) {
-    
+    /* Add tablet-specific styles here */
 }
-
-
 
 /* Mobile devices */
 @media (max-width: 767px) {
-    .HeaderWrapper{
+    .HeaderWrapper {
         padding: 0 2%;
     }
 
-    .HeaderWrapper .SearchAuthContainer .inputContainer{
+    .HeaderWrapper .SearchAuthContainer .inputContainer {
         width: 50px;
         background-color: transparent;
+    }
 
-        input{
-            display: none;
-        }
+    .HeaderWrapper .SearchAuthContainer .inputContainer input {
+        display: none;
     }
 
     .HeaderWrapper .SearchAuthContainer .inputContainer.active {
         width: 100%;
+        background: #c8f7c5;
+        margin-top: 25px;
     }
 
     .HeaderWrapper .SearchAuthContainer .inputContainer.active input {
         display: block;
         width: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 1.2rem;
+        color: #333;
     }
 }

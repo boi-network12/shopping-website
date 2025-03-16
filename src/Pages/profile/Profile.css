@@ -1,6 +1,5 @@
 .profile-container {
     width: 100%;
-    height: 100lvh;
 }
 
 .profile-content {
@@ -10,7 +9,6 @@
     align-items: flex-start;
     justify-content: center;
     padding: 0 20px;
-    height: 100lvh;
     background: #fff;
     gap: 10px;
 }
@@ -65,9 +63,11 @@
 
 .profile-container .account-details{
     margin-left: 10px;
-    max-width: 580px;
+    max-width: 500px;
     width: 100%;
     overflow: scroll;
+    padding-bottom: 4vh;
+    height: 80vh;
 }
 
 
@@ -95,7 +95,7 @@
 
     .profile-container .account-details{
         width: 100%;
-        max-width: 380px;
+        max-width: 500px;
         margin-left: 0;
     }
 }

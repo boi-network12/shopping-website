@@ -1,0 +1,120 @@
+.ChartDisplayWrapper {
+  margin-top: 40px;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.Line-chartBox,
+.RecentOrders {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  max-width: 600px;
+  min-height: 350px;
+}
+
+.Line-chartBox {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.RecentOrders {
+  flex: 1;
+}
+
+.RecentOrders h2 {
+  margin-bottom: 16px;
+  font-size: 18px;
+  color: #333;
+}
+
+.RecentOrders ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.RecentOrders li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.RecentOrders li:last-child {
+  border-bottom: none;
+}
+
+.order-email {
+  font-size: 14px;
+  color: #555;
+  flex: 2;
+}
+
+.order-amount {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  flex: 1;
+  text-align: right;
+  margin: 0 12px;
+}
+
+.order-status {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  text-transform: capitalize;
+  flex: 1;
+  text-align: center;
+}
+
+.order-status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.order-status.completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.order-status.cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.view-all {
+  display: block;
+  text-align: right;
+  margin-top: 16px;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.view-all:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ChartDisplayWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Line-chartBox,
+  .RecentOrders {
+    width: 90%;
+  }
+}

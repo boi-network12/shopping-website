@@ -27,7 +27,7 @@ const TextAnalysis = ({user}) => {
         },
         {
             id: 4,
-            number: user && user.role === "admin" && user.dailyRevenue,
+            number: user && user.role === "admin" && `₦${new Intl.NumberFormat().format(user.dailyRevenue)}`,
             title: ' Daily Revenue',
             icon: <BiDollar color='#739cb8' size={50} />
         },
