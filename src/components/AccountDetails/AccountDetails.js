@@ -1,19 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
-import "./AccountDetails.css"
+import React, { useContext, useEffect, useState } from 'react';
+import "./AccountDetails.css";
 import { BiSave, BiTrash, BiUserCircle } from 'react-icons/bi';
 import { AuthContext } from '../../context/AuthContext';
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const AccountDetails = () => {
     const { updateUserInfo, user, deleteAccount } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [deleting, setDeleting] = useState(false);
-    const navigate = useNavigate()
-
+    const navigate = useNavigate();
 
     const [countries, setCountries] = useState([]);
-    const [states, setStates] = useState([]);
-
 
     // Initialize form with user data
     const [userData, setUserData] = useState({
@@ -33,7 +30,7 @@ const AccountDetails = () => {
                 name: user.name || "",
                 email: user.email || "",
                 country: user.country || "Nigeria",
-                state: user.state ? user.state.replace(" State", "") : "",
+                state: user.state || "",
                 city: user.city || "",
                 address: user.address || "",
                 phone: user.phone || "",
@@ -44,49 +41,23 @@ const AccountDetails = () => {
     // Fetch countries
     useEffect(() => {
         const fetchCountries = async () => {
-        try {
-            const response = await fetch("https://countriesnow.space/api/v0.1/countries");
-            const data = await response.json();
-            if (data.error === false) {
-            setCountries(data.data.map((country) => country.country));
+            try {
+                const response = await fetch("https://countriesnow.space/api/v0.1/countries");
+                const data = await response.json();
+                if (!data.error) {
+                    setCountries(data.data.map((country) => country.country));
+                }
+            } catch (error) {
+                console.error("Error fetching countries:", error);
             }
-        } catch (error) {
-            console.error("Error fetching countries:", error);
-        }
         };
 
         fetchCountries();
     }, []);
 
-    // Fetch states when a country is selected
-    const fetchStates = async (countryName) => {
-        try {
-        const response = await fetch("https://countriesnow.space/api/v0.1/countries/states", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ country: countryName }),
-        });
-
-        const data = await response.json();
-        if (data.error === false) {
-            setStates(data.data.states.map((state) => state.name));
-        }
-        } catch (error) {
-        console.error("Error fetching states:", error);
-        }
-    };
-
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUserData({ ...userData, [name]: value });
-
-        if (name === "country" ) {
-            setStates([])
-          fetchStates(value);
-        }
     };
 
     const handleSubmit = async (e) => {
@@ -111,8 +82,8 @@ const AccountDetails = () => {
         setDeleting(false);
     };
 
-  return (
-    <div className="AccountDetailsWrapper">
+    return (
+        <div className="AccountDetailsWrapper">
             <div className="ShowCase">
                 <BiUserCircle size={50} color="#148114" />
                 <div>
@@ -138,19 +109,16 @@ const AccountDetails = () => {
                 <select name="country" value={userData.country} onChange={handleChange} required>
                     <option value="">Select Country</option>
                     {countries.map((country, index) => (
-                        <option key={index} value={country}>
-                        {country}
-                        </option>
+                        <option key={index} value={country}>{country}</option>
                     ))}
                 </select>
-                <select name="state" value={userData.state} onChange={handleChange} >
-                    <option value="">Select State</option>
-                    {states.map((state, index) => (
-                        <option key={index} value={state}>
-                        {state}
-                        </option>
-                    ))}
-                </select>
+                <input
+                    type="text"
+                    name="state"
+                    value={userData.state}
+                    onChange={handleChange}
+                    placeholder="State"
+                />
                 <div style={{ width: "100%", display: "flex", justifyContent: "space-between", gap: "10px" }}>
                     <input
                         type="text"
@@ -170,7 +138,7 @@ const AccountDetails = () => {
                     />
                 </div>
                 <div className="phone-input">
-                    <span className="flag">🇳🇬</span>
+                    <span className="flag">{userData.country}</span>
                     <input
                         type="text"
                         name="phone"
@@ -180,11 +148,7 @@ const AccountDetails = () => {
                         required
                     />
                 </div>
-                <div style={{
-                    display: "flex",
-                    gap: "10px",
-                    marginTop: "20px"
-                }}>
+                <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
                     <button type="submit" className="save-btn" disabled={loading || deleting}>
                         {loading ? "Saving..." : <><BiSave size={20} /> Save Changes</>}
                     </button>
@@ -200,7 +164,7 @@ const AccountDetails = () => {
                 </div>
             </form>
         </div>
-  )
-}
+    );
+};
 
-export default AccountDetails
+export default AccountDetails;

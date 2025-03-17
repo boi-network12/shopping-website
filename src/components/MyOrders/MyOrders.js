@@ -10,10 +10,11 @@ const MyOrders = ({ searchQuery }) => {
     getUserOrders()
   }, [ getUserOrders]);
 
-  const filteredOrders = orders.filter(order => 
-    order._id.includes(searchQuery) || 
-    order.cartItems.some(item => item.productName.includes(searchQuery))
-  )
+  const filteredOrders = (orders || []).filter(order => 
+    order?._id?.includes(searchQuery || '') || 
+    order?.cartItems?.some(item => item?.productName?.includes(searchQuery || ''))
+  );
+  
 
   return (
     <div className='AccountDetailsWrapper'>

@@ -75,7 +75,7 @@ const Profile = () => {
                                 className={activeSection === "transactions" ? "active" : ""} 
                                 onClick={() => handleSectionChange("transactions")}
                             >
-                                <BiStar color="#148114" size={22} /> Pending Reviews
+                                <BiStar color="#148114" size={22} /> Transactions Reviews
                             </li>
                             <li className="logout"
                                onClick={handleLogout}

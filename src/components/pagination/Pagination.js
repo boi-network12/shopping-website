@@ -82,7 +82,7 @@ const Pagination = ({ selectedCategory, searchQuery  }) => {
             <div key={index} className="product-card" onClick={() => handleFullDetails(product)}>
               <img src={product.image} alt={product.productName} />
               <h3>{product.productName}</h3>
-              <p className="price">₦{product.price}</p>
+              <p className="price">₦{new Intl.NumberFormat().format(product.price)}</p>
               <button className="select-button" onClick={() => setIsProductModalOpen(true)}>
                 Select Options
               </button>
